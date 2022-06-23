@@ -37,12 +37,30 @@ h1 {
   padding: 20px;
 }
 
- {
-}
+ 
 
 #name {
   margin-bottom: 10px;
   width: 90%;
-  margin-left: 5px;
+  margin-left: 15px;
   height: 30px;
+}
+
+.button{
+  text-align: center;
+  padding-bottom: 30px;
+}
+button{
+  padding: 5px;
+  margin: 5px;
+}
+
+#tasks{
+  padding-left: 15px;
+  font-size: 18px;
+}
+
+.checkbox{
+  margin-right: 10px;
+
 }

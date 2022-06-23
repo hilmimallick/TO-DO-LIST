@@ -6,7 +6,8 @@ let lists = JSON.parse(localStorage.getItem("records"))
 lists.forEach((item) => {
   console.log(item.name);
   document.querySelector("#tasks").innerHTML += `
- <p><input type="checkbox" class="cb">${item.name}</p>`;
+ <p><input type="checkbox" class="checkbox">${item.name}</p>
+ `;
 });
 
 function addRecord() {
@@ -17,6 +18,8 @@ function addRecord() {
   //
   localStorage.setItem("records", JSON.stringify(lists));
 }
+
+
 function deleteRecord(id) {
   if (id > -1) {
     lists.splice(id, 1);
