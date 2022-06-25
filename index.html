@@ -5,29 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    
+    <script
+    src="https://kit.fontawesome.com/e6061f27ac.js"
+    crossorigin="anonymous"
+  ></script>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <div class="container">
-      <form>
-        <div class="card-body">
-          <h1 class="card-title">TO-DO-List</h1>
+      <form onsubmit="event.preventDefault(); addTask()">
+      <h1>TO~DO~LIST</h1>
+  <button onclick="sortName()">Sort</button>
+  
+  <input type="text" name="addTodo" id="addTodo" placeholder="Add Task" required>
+  <div class="button">
 
-          <input type="text" id="name" required placeholder="Enter your task" />
-            <div class="button">
-
-              <button type="submit" id="addRecord">ADD Task</button>
-              <button type="submit" id="deleteRecord">DELETE</button>
-            </div>
-          
-        </div>
-      </form>
-      <div id="tasks">
-      </div>
-    
-    
-
+      <button type="submit">ADD TASK</button>
+  </div>
+ 
+</form>
+<ul id="todos"></ul>
+</div>
     <script src="./index.js"></script>
   </body>
 </html>

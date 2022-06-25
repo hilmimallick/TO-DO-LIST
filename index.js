@@ -1,46 +1,68 @@
-// localStorage.removeItem('records');
-let lists = JSON.parse(localStorage.getItem("records"))
-  ? JSON.parse(localStorage.getItem("records"))
+let todos = JSON.parse(localStorage.getItem("todos"))
+  ? JSON.parse(localStorage.getItem("todos"))
   : [];
 
-lists.forEach((item) => {
-  console.log(item.name);
-  document.querySelector("#tasks").innerHTML += `
- <p><input type="checkbox" class="checkbox">${item.name}</p>
- `;
-});
 
-function addRecord() {
-  // e.preventDefault();
-  lists.push({
-    name: document.getElementById("name").value,
-  });
-  //
-  localStorage.setItem("records", JSON.stringify(lists));
+let asc = true;
+
+const todosContainer = document.querySelector("#todos")
+
+const showTodos = (todos) => {
+    todosContainer.innerHTML = "";
+    todos.forEach(todo => {
+        todosContainer.innerHTML += `
+         <li>
+        <input type="checkbox" /><span> ${todo.title}</span>
+        <span class="icon"><i class="fa-solid fa-trash-can" onclick="deleteTask(${todo.id})"></i></span>
+        </li> 
+        `;
+    });
+};
+
+showTodos(todos);
+//add task function
+function addTask() {
+    //get the value
+    const task = document.querySelector("#addTodo").value;
+    
+    //create the object from the value
+    const todo = {
+        title: task,
+        id: todos.length + 1
+    };
+
+    //add the object to the array
+    todos.push(todo);
+    localStorage.setItem("todos", JSON.stringify(todos));
+    showTodos(todos);
+    document.querySelector("#addTodo").value = "";
+
+
+};
+
+//delete task function
+function deleteTask(id) {
+    todos = todos.filter(todo => todo.id !== id);
+    localStorage.setItem("todos", JSON.stringify(todos));
+    showTodos(todos);
 }
 
+//sort function
+function sortName(){
+    todos.sort((a, b) =>{
+        if (a.tiltetoLowerCase() < b.tiltetoLowerCase()){
+            return -1;
+        }
+        if (a.tiltetoLowerCase() > b.tiltetoLowerCase()){
+            return 1;
+        }
+        return 0;
+    })
 
-function deleteRecord(id) {
-  if (id > -1) {
-    lists.splice(id, 1);
-    // After delete
-    localStorage.setItem("records", JSON.stringify(lists));
-  } else {
-    console.log("Name was not found");
-  }
+    if (!asc) todos.reverse();
+
+    asc = !asc;
+
+    showTodos(todos);
 }
-// Load data
-(function loadData() {
-  console.table(lists);
-})();
-// loadData();
-// Add Event listener
-document.querySelector("#addRecord").addEventListener("click", addRecord);
-// delete record
-document.querySelector("#deleteRecord").addEventListener("click", (e) => {
-  e.preventDefault();
-  let name = document.getElementById("name").value;
-  let index = lists.findIndex((item) => item.name === name);
-  console.log(index);
-  deleteRecord(index);
-});
+
